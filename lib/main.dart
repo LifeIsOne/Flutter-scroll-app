@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,13 +21,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: [
           Container(
-            height: 500,
+            height: 1000,
             color: Colors.red,
           ),
-          Expanded(
+          SizedBox(
+            height: 105,
             child: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
