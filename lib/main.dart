@@ -5,44 +5,52 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          Container(
-            height: 1000,
-            color: Colors.red,
-          ),
-          SizedBox(
-            height: 105,
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: Container(
-                    height: 100,
-                    color: Colors.blue,
-                  ),
-                );
-              },
+      body: NestedScrollView(
+        headerSliverBuilder: (context, _) {
+          return [
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Container(
+                  height: 300,
+                  color: Colors.red,
+                ),
+                Container(
+                  height: 300,
+                  color: Colors.yellow,
+                ),
+              ]),
             ),
-          ),
-        ],
+          ];
+        },
+        body: ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Container(
+                height: 100,
+                color: Colors.blue,
+              ),
+            );
+          },
+        ),
       ),
     );
   }
